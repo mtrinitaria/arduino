@@ -7,7 +7,7 @@
   1. Arduino UNO
   2. 7-Segment Display
   3. Passive buzzer
-  4. breadboard and jumper wires
+  4. breadboard, resistor and jumper wires
 
   DIAGRAM of the 7SD
    --
@@ -16,21 +16,28 @@
   |  |
    --  
   
-  These are the pins I used:
+  These are the pins I used in Arduino:
   
      12
   11    13
      10 
   02    04
      03
-
+  
+  Connections:
+  1. Connect the 7SD pins with resistors
+  2. Connect the resistors to the Arduino pins
+  3. The ground of the 7SD is in its pin 3 and 8, connect any of those to ground
+  4. Connect the Passive Buzzer 1 pin to the ground, and other pin to the Arduino pin 8
 */
 
-bool toggle = false;
+// all segements
 int segments[] = {2, 3, 4, 5, 10, 11, 12, 13};
+// counter starts at 9 decrementing
 int cntr = 9;
 
 int len = 0;
+// number variable with set of PINS.
 int N0[] = {2, 3, 4, 11, 12, 13};
 int N1[] = {4, 13};
 int N2[] = {12, 13, 10, 2, 3};
@@ -42,9 +49,7 @@ int N7[] = {12, 13, 4};
 int N8[] = {11, 12, 13, 10, 2, 3, 4};
 int N9[] = {12, 11, 10, 13, 4, 3};
 
-int* arr[] = {N0, N1, N2};
-
-const int MY_LED = 8;
+const int BUZZER = 8;
 
 // the setup routine runs once when you press reset:
 void setup() {
@@ -61,33 +66,11 @@ void setup() {
 
 // the loop routine runs over and over again forever:
 void loop() {
-//  toggle = !toggle;
-  
-//  for (int i = 0; i < 8; i++) {
-//    if (toggle == 1) {
-//      digitalWrite(segments[i], HIGH);
-//    } else {
-//      digitalWrite(segments[i], LOW);
-//    }
-//  }
-
-  
-  
-//  if (cntr >= 10) {
-//    cntr = 0;
-//    toggle = !toggle;
-//  }
   if (cntr < 0) {
     cntr = 9;
-    toggle = !toggle;
   }
 
-//  if (toggle) {
-//    digitalWrite(MY_LED, 1);
-//  } else {
-//    digitalWrite(MY_LED, LOW);
-//  }
-  
+  //  clear all led
   for (int i = 0; i < 8; i++) {
     digitalWrite(segments[i], LOW);
   }
@@ -157,9 +140,8 @@ void loop() {
 
   cntr --;
   
-//  digitalWrite(MY_LED, LOW);
+  //  buzz and delay
   if (cntr < 0) {
-//    digitalWrite(MY_LED, HIGH);
     for (int i = 0; i < 10; i++) {
       tone(MY_LED, 1000 - ( i * 10 ));
       delay(100);

@@ -1,35 +1,3 @@
-/*
-  7-Segment Display (Single) Countdown
-
-  10 seconds countdown. When reach 0, it will alarm.
-
-  Materials:
-  1. Arduino UNO
-  2. 7-Segment Display
-  3. Passive buzzer
-  4. breadboard, resistor and jumper wires
-
-  DIAGRAM of the 7SD
-   --
-  |  |
-   --
-  |  |
-   --  
-  
-  These are the pins I used in Arduino:
-  
-     12
-  11    13
-     10 
-  02    04
-     03
-  
-  Connections:
-  1. Connect the 7SD pins with resistors
-  2. Connect the resistors to the Arduino pins
-  3. The ground of the 7SD is in its pin 3 and 8, connect any of those to ground
-  4. Connect the Passive Buzzer 1 pin to the ground, and other pin to the Arduino pin 8
-*/
 
 // all segements
 int segments[] = {2, 3, 4, 5, 10, 11, 12, 13};
